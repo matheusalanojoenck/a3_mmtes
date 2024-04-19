@@ -7,23 +7,23 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="title">Title</labe>
-            <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+            <input type="text" name="title" class="form-control" id="title" placeholder="Title" required>
         </div>
         <div class="form-group">
             <label for="description">Description</labe>
-            <input type="text" name="description" class="form-control" id="description" placeholder="Description">
+            <input type="text" name="description" class="form-control" id="description" placeholder="Description" required>
         </div>
         <div class="form-group">
             <label for="imageurl">Image url</labe>
-            <input type="text" name="imageurl" class="form-control" id="imageurl" placeholder="Image url">
+            <input type="text" name="imageurl" class="form-control" id="imageurl" placeholder="Image url" required>
         </div>
         <div class="form-group">
             <label for="price">Price</labe>
-            <input type="number" step="0.01" min=0 name="price" class="form-control" id="price" placeholder="0.00">
+            <input type="number" step="0.01" min=0 name="price" class="form-control" id="price" placeholder="0.00" required>
         </div>
         <div class="form-group">
             <label for="category" id="category">Choose a category:</label>
-            <select name="category" id="category">
+            <select name="category" id="category" required>
                 {% for category in categories %}
                     <option value="{{ category }}">{{ category }}</option>
                 {% endfor %}

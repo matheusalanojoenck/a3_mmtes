@@ -1,15 +1,15 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Watchlist</h2>
+    <h2>Lista de desejos</h2>
     {% for listing in listings %}
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="{{ listing.imageUrl }}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{ listing.title }}</h5>
             <p class="card-text">{{ listing.description }}</p>
-            <p class="card-text">Price: ${{ listing.price }}</p>
-            <a href="{% url 'listing' listingId=listing.id %}" class="btn btn-primary">Listing Page</a>
+            <p class="card-text">Preço: ${{ listing.price }}</p>
+            <a href="{% url 'listing' listingId=listing.id %}" class="btn btn-primary">Página do Item</a>
         </div>
     </div>
 {% endfor%}

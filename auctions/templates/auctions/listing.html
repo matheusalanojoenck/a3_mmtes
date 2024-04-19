@@ -2,9 +2,9 @@
 {% load mathfilters %}
 
 {% block body %}
-    <h2>Listing: {{ listing.title }}</h2>
+    <h2>Item: {{ listing.title }}</h2>
     {% if user.is_authenticated and listing.winner == user and listing.isActive == False %}
-        <h3>You are the auction winner!</h3>
+        <h3>Você ganhou esse leilão!</h3>
     {% endif %}
 
     <div>
@@ -12,18 +12,18 @@
             <form action="{% url 'listing' listingId=listing.id %}" method="POST">
                 {% csrf_token %}
                 {% if inWatchlist %}
-                    <button type="submit" name="removeWathclist">Remove from Watchlist</button>
+                    <button type="submit" name="removeWathclist">Remover da Lista de Desejos</button>
                 {% else %}
-                    <button type="submit" name="addWatchlist">Add to Watchlist</button>
+                    <button type="submit" name="addWatchlist">Adicionar a Lista de Desejos</button>
                 {% endif %}
             </form>
             {% if listing.owner == user%}
                 <form action="{% url 'listing' listingId=listing.id %}" method="POST">
                     {% csrf_token %}
                     {% if listing.isActive %}
-                        <button type="submit" name="closeAuction">Close Auction</button>
+                        <button type="submit" name="closeAuction">Encerrar Leilão</button>
                     {% else %}
-                        <button type="submit" name="openAuction">Open Auction</button>
+                        <button type="submit" name="openAuction">Abrir Leilão</button>
                     {% endif %}
                 </form>
             {% endif %}
@@ -34,30 +34,30 @@
         <div class="card-body">
             <p class="card-text">{{ listing.description }}</p>
             <p class="card-text">
-                <h2>${{ listing.price }}</h2>
+                <h2>R$ {{ listing.price }}</h2>
             </p>
 
 
             <p class="card-text">
-                <h4>Details</h4>
+                <h4>Detalhes</h4>
             </p>
             <form>
                 {% csrf_token %}
             </form>
             <ul>
-                <li>Listed by: {{ listing.owner }}</li>
-                <li>Category: {{ listing.category }}</li>
+                <li>Criado por: {{ listing.owner }}</li>
+                <li>Categoria: {{ listing.category }}</li>
             </ul>
         </div>
     </div>
-    <h3>Bids</h3>
+    <h3>Ofertas</h3>
     {% if user.is_authenticated and listing.isActive%}
         <div class="m-2">
             {% if listing.owner != user%}
                 <form  action="{% url 'listing' listingId=listing.id %}" method="POST">
                     {% csrf_token %}
                     <input type="number" step="0.01" min="{{ listing.price|addition:0.01 }}" name="bid" id="bid" placeholder="0.00">
-                    <button type="submit" name="placeBid">Place Bid</button>
+                    <button type="submit" name="placeBid">Propor Oferta</button>
                 </form>
             {% endif %}
         </div>
@@ -65,17 +65,17 @@
     <ul class="list-group">
         {% for bid in bids %}
             <li class="list-group-item">
-                <p>{{ bid.user }} bidded ${{ bid.bid }}</p>
+                <p>{{ bid.user }} ofertou ${{ bid.bid }}</p>
             </li>
         {% endfor %}
       </ul>
-    <h3>Comments</h3>
+    <h3>Comentários</h3>
     {% if user.is_authenticated %}
     <div class="m-2">
         <form  action="{% url 'listing' listingId=listing.id %}" method="POST">
             {% csrf_token %}
-            <input type="text" name="comment" placeholder="Comment">
-            <button type="submit" name="addComment">Comment</button>
+            <input type="text" name="comment" placeholder="Comentário">
+            <button type="submit" name="addComment">Comentar</button>
         </form>
     </div>
     {% endif %}
@@ -83,7 +83,7 @@
         {% for comment in comments %}
             <li class="list-group-item">
                 <p>{{ comment.comment }}</p>
-                <p>Posted by: {{ comment.author }} </p>
+                <p>Postado por: {{ comment.author }} </p>
             </li>
         {% endfor %}
       </ul>
