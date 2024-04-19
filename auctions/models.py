@@ -30,7 +30,7 @@ class Listing(models.Model):
         related_name="category",
     )
     watchlist = models.ManyToManyField(
-        User, blank=True, null=True, related_name="watchlist"
+        User, blank=True, related_name="watchlist"
     )
     winner = models.ForeignKey(
         User, on_delete=models.PROTECT, blank=False, null=True, related_name="winner"
