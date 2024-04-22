@@ -50,14 +50,14 @@
             </ul>
         </div>
     </div>
-    <h3>Ofertas</h3>
+    <h3>Lances</h3>
     {% if user.is_authenticated and listing.isActive%}
         <div class="m-2">
             {% if listing.owner != user%}
                 <form  action="{% url 'listing' listingId=listing.id %}" method="POST">
                     {% csrf_token %}
                     <input type="number" step="0.01" min="{{ listing.price|addition:0.01 }}" name="bid" id="bid" placeholder="0.00">
-                    <button type="submit" name="placeBid">Propor Oferta</button>
+                    <button type="submit" name="placeBid">Lance</button>
                 </form>
             {% endif %}
         </div>

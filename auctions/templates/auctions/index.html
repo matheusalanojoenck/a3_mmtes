@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Itens Ativos</h2>
+    <h2>Anúncios Ativos</h2>
     <form action="{% url 'index' %}" method="POST" class="my-1">
         {% csrf_token %}
         <label for="category"> Selecione uma categoria: </label>
@@ -20,7 +20,7 @@
                 <h5 class="card-title">{{ listing.title }}</h5>
                 <p class="card-text">{{ listing.description }}</p>
                 <p class="card-text">Preço: R$ {{ listing.price }}</p>
-                <a href="{% url 'listing' listingId=listing.id %}" class="btn btn-primary">Página do Item</a>
+                <a href="{% url 'listing' listingId=listing.id %}" class="btn btn-primary">Página do Anúncio</a>
             </div>
         </div>
     {% endfor%}
